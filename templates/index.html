@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Weather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #372579;
+            color: aliceblue;
+            font-size: 36px;
+        }
+
+        .weather-container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container weather-container">
+        <h1>Текущая погода</h1>
+        <form method="post" action="/">
+            <input type="text" id="cityName" name="cityName" class="form-control" placeholder="Введите город">
+            <button type="submit" class="btn btn-primary btn-block mt-3">Узнать</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Weather</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/weather.css') }}">
+    <style>
+        body {
+            background-color: #372579;
+            color: aliceblue;
+            font-size: 36px;
+        }
+
+        .weather-container {
+            margin-top: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- go back button -->
+    <div>
+        <form action="/" method="get">
+            <button type="submit" class="btn btn-primary btn-block mt-3">⮜ Назад</button>
+        </form>
+    </div>
+
+    <!-- current condition -->
+    <div class="container weather-container">
+        <div class="current-weather-container">
+            <div class="city-name">{{current_weather_info.city}}, {{current_weather_info.region}},
+                {{current_weather_info.country}}</div>
+            <div class="temperature">{{current_weather_info.current_temp}}°C</div>
+            <div class="weather-descr">{{current_weather_info.weather_description}}</div>
+            <div class="temperature-feels">Ощущается как {{current_weather_info.feels_like_temp}}°C</div>
+            <div class="cloud-cover">☁️{{current_weather_info.cloud_cover}} %</div>
+            <div class="humidity">⛲{{current_weather_info.humidity}} %</div>
+            <div class="precip">💧{{current_weather_info.precip_MM}} мм</div>
+            <div class="pressure">⏲️{{current_weather_info.pressure}} гПА</div>
+            <div class="uv-index">☀️{{current_weather_info.uv_index}}</div>
+            <div class="visibility">👁️{{current_weather_info.visibility}}</div>
+            <div class="wind-speed">💨{{current_weather_info.wind_speed}} км/ч</div>
+            <div class="wind-dir">🧭{{current_weather_info.wind_direction_16p}}</div>
+        </div>
+
+        <!-- forecast -->
+        <!-- hourly forecast -->
+        <div style="padding-top: 1em; text-align: center; font-size: 40px;">Почасовой прогноз</div>
+        <div class="hourly-forecast-container">
+            {% for hour,item in hourly_info.items() %}
+            <div>
+                <div>{{hour}}</div>
+                <div style="font-weight: bold;">{{item.tempC}} °C</div>
+                <div>🌧️{{item.chanceofrain}} %</div>
+                <div>💨{{item.WindGustKmph}}</div>
+                <div class="weather-descr-hourly">{{item.weatherDesc}}</div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div style="padding-top: 1em; text-align: center; font-size: 40px;">Прогноз по дням</div>
+        <div class="day-forecast-container">
+            {% for day,item in three_days.items() %}
+                <div>
+                    <div>{{day}}</div>
+                    <div>⬆️{{item.maxtempC}} °C</div>
+                    <div>🌡{{item.avgtempC}} °C</div>
+                    <div>⬇️{{item.mintempC}} °C</div>
+                </div>
+            {% endfor %}
+        </div>
+</body>
+
+</html>
